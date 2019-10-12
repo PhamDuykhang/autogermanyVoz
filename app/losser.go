@@ -18,9 +18,7 @@ func LoginVOZ(useName, passWord string) ([]*http.Cookie, error) {
 		logrus.Error("can't encode your password", err)
 		return nil, err
 	}
-
 	passWord = fmt.Sprintf("%x", md5Cry.Sum(nil))
-
 	form := url.Values{}
 	form.Add("vb_login_username",useName)
 	form.Add("vb_login_password","")
@@ -39,11 +37,18 @@ func LoginVOZ(useName, passWord string) ([]*http.Cookie, error) {
 	}
 	rq.Header.Add("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36")
 	rq.Header.Add("Content-Type","application/x-www-form-urlencoded")
-	rq.Header.Add("Referer", "https://forums.voz.vn")
+	//rq.Header.Add("Referer", "https://forums.voz.vn")
 	res, err := client.Do(rq)
 	if err != nil {
+		logrus.Println(err)
 		return nil, err
 	}
-	fmt.Println(res.Cookies())
+	err = res.Body.Close()
+	if err!= nil{
+
+	}
 	return res.Cookies(), nil
+}
+func FindNewThread(threadURL chan <- string,boxNumber int)  {
+
 }

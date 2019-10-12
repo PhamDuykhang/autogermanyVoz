@@ -14,7 +14,6 @@ func GetHTTPClient() *http.Client {
 			},
 		},
 		Timeout: 10 * time.Second,
-
 	}
 }
 
@@ -23,7 +22,10 @@ func GetCustomRequest(url string) (*http.Request, error) {
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Add("Cookie", "vflastvisit=1535954670; vflastactivity=0; vfforum_view=d99e85613f547374e9db4f942bf6192fb611ae2aa-1-%7Bi-17_i-1535954671_%7D; _ga=GA1.2.144936460.1535954673; _gid=GA1.2.1737523081.1535954673; _gat_gtag_UA_351630_1=1")
 	req.Header.Add("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36")
 	return req, nil
+}
+
+func AddGeneralHeader(r *http.Request) {
+	r.Header.Add("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36")
 }
